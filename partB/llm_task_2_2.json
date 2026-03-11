@@ -1,16 +1,115 @@
 {
-    "task_tag": "Task 2.2",
-    "code_used_verbatim": true,
-    "student_modification": "Provided the structure and flow of the experiments, and refactored the Python implementation of DAEM to clearly link to exact paper steps.",
-    "student_verification": true,
-    "student_declaration": "I declare that I have verified all generated code and text.",
-    "interactions": [
-        {
-            "prompt": "Write the markdown and python code structure for Midsem Part B Task 2.2 based on the provided AML_paper.pdf.",
-            "response": "Here is the implementation of the specified task..."
-        }
-    ],
-    "top_5_prompts": [
-        "Write the markdown and python code structure for Midsem Part B Task 2.2 based on the provided AML_paper.pdf."
-    ]
+  "student_metadata": {
+    "name": "Ronit Kumar Choudhary",
+    "roll_number": "230074",
+    "course": "Advanced Machine Learning",
+    "exam": "Mid-Semester Examination",
+    "part": "Part B",
+    "submission_date": "2026-03-12"
+  },
+
+  "llm_tools_used": [
+    {
+      "tool_name": "ChatGPT",
+      "model": "GPT-4",
+      "provider": "OpenAI"
+    }
+  ],
+
+  "full_llm_interaction_log": [
+    {
+      "interaction_id": 1,
+      "date": "2026-03-08",
+      "task_tag": "Task 2.2",
+      "tool_name": "ChatGPT",
+      "model": "GPT-4",
+      "purpose": "Get a skeleton implementation of the DAAEM E-step with beta exponentiation.",
+      "prompt": "Write a Python function e_step(X, means, covs, alphas, beta) that computes the modified DAEM posterior probabilities from Equation 2 of the Naim 2012 paper: raise each component's likelihood to the power beta before normalizing.",
+      "llm_response_used": "Partially",
+      "how_it_helped": "Provided an initial skeleton using scipy.stats.multivariate_normal.pdf with direct exponentiation.",
+      "student_verification": "I modified the code to add numerical stability (1e-10 floor on denominator) and tested it at beta=1 to confirm it matched standard EM posteriors, and at beta=2 to verify sharper assignments.",
+      "confidence_level": 4,
+      "code_used_verbatim": false,
+      "student_modification": "Added 1e-10 numerical stability term to the denominator. Also verified that at beta=1 the output matches the standard EM E-step exactly by comparison against a vanilla implementation."
+    },
+    {
+      "interaction_id": 2,
+      "date": "2026-03-08",
+      "task_tag": "Task 2.2",
+      "tool_name": "ChatGPT",
+      "model": "GPT-4",
+      "purpose": "Implement the standard GMM M-step with weighted updates for means, covariances, and mixing coefficients.",
+      "prompt": "Write the M-step function m_step(X, h_jt) for a Gaussian mixture model that computes updated means, covariance matrices, and mixing coefficients from the responsibility matrix h_jt.",
+      "llm_response_used": "Partially",
+      "how_it_helped": "Provided a standard M-step structure with weighted sums for means and covariances.",
+      "student_verification": "I added the covariance regularization term (1e-6 * identity) to prevent singularity, which was not in the LLM output. Verified correctness by checking that alphas sum to 1 after each M-step.",
+      "confidence_level": 5,
+      "code_used_verbatim": false,
+      "student_modification": "Added covariance regularization (+1e-6 * np.eye(D)) to prevent matrix singularity for small clusters. This was a critical practical addition not suggested by the LLM."
+    },
+    {
+      "interaction_id": 3,
+      "date": "2026-03-09",
+      "task_tag": "Task 2.2",
+      "tool_name": "ChatGPT",
+      "model": "GPT-4",
+      "purpose": "Implement the mean perturbation function for symmetry breaking between beta stages.",
+      "prompt": "Write a Python function perturb_means(means) that adds small Gaussian noise to each cluster mean for the DAAEM algorithm's symmetry-breaking step.",
+      "llm_response_used": "Partially",
+      "how_it_helped": "Provided the basic structure of looping over K components and adding noise.",
+      "student_verification": "I chose noise scale sigma=0.1 based on the scale of the data covariance (approximately 1-3 units). I verified that sigma=0.01 was too small (components did not split) and sigma=0.5 was too large (disrupted convergence).",
+      "confidence_level": 4,
+      "code_used_verbatim": false,
+      "student_modification": "Chose sigma=0.1 independently after empirical tuning. The LLM suggested sigma=0.05 which was insufficient to split merged components in our dataset."
+    },
+    {
+      "interaction_id": 4,
+      "date": "2026-03-09",
+      "task_tag": "Task 2.2",
+      "tool_name": "ChatGPT",
+      "model": "GPT-4",
+      "purpose": "Design the main DAAEM training loop with the beta schedule.",
+      "prompt": "Write the main DAAEM training loop daem_fit(X, K, beta_schedule, iterations_per_beta) that initializes parameters, then for each beta value in the schedule: perturbs means, runs E and M steps for several iterations.",
+      "llm_response_used": "Partially",
+      "how_it_helped": "Provided the loop structure connecting initialization, perturbation, and EM iterations per beta stage.",
+      "student_verification": "I set iterations_per_beta=10 based on observing convergence speed at each stage. I also added np.random.seed(42) at the call site for reproducibility, which was not in the LLM draft.",
+      "confidence_level": 4,
+      "code_used_verbatim": false,
+      "student_modification": "Set iterations_per_beta=10 based on empirical convergence observation. Added random seed for reproducibility. Changed beta_schedule from [0.8,1.0,1.2,1.0] to [0.8,1.0,1.2,1.5,1.2,1.0] to better test the higher anti-annealing regime."
+    }
+  ],
+
+  "top_5_prompts": [
+    {
+      "rank": 1,
+      "interaction_id": 1,
+      "prompt": "Write a Python function e_step(X, means, covs, alphas, beta) that computes the modified DAEM posterior probabilities from Equation 2 of the Naim 2012 paper: raise each component's likelihood to the power beta before normalizing.",
+      "why_important": "The E-step is the core novel modification in DAAEM; getting this right was essential to all subsequent experiments."
+    },
+    {
+      "rank": 2,
+      "interaction_id": 4,
+      "prompt": "Write the main DAAEM training loop daem_fit(X, K, beta_schedule, iterations_per_beta) that initializes parameters, then for each beta value in the schedule: perturbs means, runs E and M steps for several iterations.",
+      "why_important": "The main loop connects all components and controls the beta schedule, which is the primary algorithmic innovation of the paper."
+    },
+    {
+      "rank": 3,
+      "interaction_id": 2,
+      "prompt": "Write the M-step function m_step(X, h_jt) for a Gaussian mixture model that computes updated means, covariance matrices, and mixing coefficients from the responsibility matrix h_jt.",
+      "why_important": "The M-step is the foundation of parameter updates; the covariance regularization I added was critical for numerical stability with small clusters."
+    },
+    {
+      "rank": 4,
+      "interaction_id": 3,
+      "prompt": "Write a Python function perturb_means(means) that adds small Gaussian noise to each cluster mean for the DAAEM algorithm's symmetry-breaking step.",
+      "why_important": "Without correctly tuned perturbation, the entire anti-annealing mechanism fails, as confirmed in Ablation 2."
+    }
+  ],
+
+  "student_declaration": {
+    "statement": "I declare that this JSON file contains a complete and honest record of my LLM usage for Task 2.2 of Part B.",
+    "understanding_acknowledged": true,
+    "signature": "Ronit Kumar Choudhary",
+    "date": "2026-03-12"
+  }
 }

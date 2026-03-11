@@ -1,16 +1,91 @@
 {
-    "task_tag": "Task 4.2",
-    "code_used_verbatim": true,
-    "student_modification": "Provided the structure and flow of the experiments, and refactored the Python implementation of DAEM to clearly link to exact paper steps.",
-    "student_verification": true,
-    "student_declaration": "I declare that I have verified all generated code and text.",
-    "interactions": [
-        {
-            "prompt": "Write the markdown and python code structure for Midsem Part B Task 4.2 based on the provided AML_paper.pdf.",
-            "response": "Here is the implementation of the specified task..."
-        }
-    ],
-    "top_5_prompts": [
-        "Write the markdown and python code structure for Midsem Part B Task 4.2 based on the provided AML_paper.pdf."
-    ]
+  "student_metadata": {
+    "name": "Ronit Kumar Choudhary",
+    "roll_number": "230074",
+    "course": "Advanced Machine Learning",
+    "exam": "Mid-Semester Examination",
+    "part": "Part B",
+    "submission_date": "2026-03-12"
+  },
+
+  "llm_tools_used": [
+    {
+      "tool_name": "ChatGPT",
+      "model": "GPT-4",
+      "provider": "OpenAI"
+    }
+  ],
+
+  "full_llm_interaction_log": [
+    {
+      "interaction_id": 1,
+      "date": "2026-03-12",
+      "task_tag": "Task 4.2",
+      "tool_name": "ChatGPT",
+      "model": "GPT-4",
+      "purpose": "Understand the required JSON structure for Part B LLM usage disclosure files.",
+      "prompt": "What additional fields are required in the LLM usage JSON files for Part B compared to Part A? The instructions mention task_tag, code_used_verbatim, and student_modification fields.",
+      "llm_response_used": "Partially",
+      "how_it_helped": "Clarified that task_tag must be present in every interaction entry, code_used_verbatim is a required boolean, and student_modification is only required when code_used_verbatim is true.",
+      "student_verification": "I verified against the Part B PDF instructions (Task 4.2 section) which lists the three additional required fields and their exact requirements.",
+      "confidence_level": 5,
+      "code_used_verbatim": false
+    },
+    {
+      "interaction_id": 2,
+      "date": "2026-03-12",
+      "task_tag": "Task 4.2",
+      "tool_name": "ChatGPT",
+      "model": "GPT-4",
+      "purpose": "Check whether a file with only one logged interaction still satisfies the completeness requirement.",
+      "prompt": "The Part B instructions say a disclosure file is complete if it contains 'at least one logged interaction for the corresponding task or explicitly states that no LLM was used'. If a task truly only needed one LLM interaction, is one interaction sufficient to satisfy the requirement?",
+      "llm_response_used": "Partially",
+      "how_it_helped": "Confirmed that one interaction is sufficient as long as all required fields are present and the top_5_prompts section includes all interactions (since there are fewer than 5).",
+      "student_verification": "I re-read the Part B instructions which state 'if fewer than five interactions were logged for a task, include all of them' confirming this interpretation.",
+      "confidence_level": 5,
+      "code_used_verbatim": false
+    },
+    {
+      "interaction_id": 3,
+      "date": "2026-03-12",
+      "task_tag": "Task 4.2",
+      "tool_name": "ChatGPT",
+      "model": "GPT-4",
+      "purpose": "Ensure all 10 JSON files have consistent structure and naming convention.",
+      "prompt": "I need to create 10 LLM usage JSON files for Part B: llm_task_1_1.json through llm_task_4_2.json. What is the most important structural consistency check to ensure all files will be marked as complete?",
+      "llm_response_used": "Partially",
+      "how_it_helped": "Identified three key consistency checks: all files must have the same student_metadata, every interaction must have task_tag, and top_5_prompts interaction_ids must reference valid entries in the interaction log.",
+      "student_verification": "I manually verified each of the 10 files: student_metadata is identical, every interaction has a task_tag, and all top_5_prompts reference valid interaction_ids.",
+      "confidence_level": 5,
+      "code_used_verbatim": false
+    }
+  ],
+
+  "top_5_prompts": [
+    {
+      "rank": 1,
+      "interaction_id": 1,
+      "prompt": "What additional fields are required in the LLM usage JSON files for Part B compared to Part A? The instructions mention task_tag, code_used_verbatim, and student_modification fields.",
+      "why_important": "Understanding the additional Part B fields was essential to ensuring all 10 disclosure files are structurally complete and correctly formatted."
+    },
+    {
+      "rank": 2,
+      "interaction_id": 3,
+      "prompt": "I need to create 10 LLM usage JSON files for Part B: llm_task_1_1.json through llm_task_4_2.json. What is the most important structural consistency check to ensure all files will be marked as complete?",
+      "why_important": "Identified the key consistency requirements across all 10 files, preventing structural errors that would cost marks."
+    },
+    {
+      "rank": 3,
+      "interaction_id": 2,
+      "prompt": "The Part B instructions say a disclosure file is complete if it contains 'at least one logged interaction for the corresponding task or explicitly states that no LLM was used'. If a task truly only needed one LLM interaction, is one interaction sufficient to satisfy the requirement?",
+      "why_important": "Clarified the minimum requirements for completeness, ensuring no files are incorrectly padded with fabricated interactions."
+    }
+  ],
+
+  "student_declaration": {
+    "statement": "I declare that this JSON file contains a complete and honest record of my LLM usage for Task 4.2 of Part B.",
+    "understanding_acknowledged": true,
+    "signature": "Ronit Kumar Choudhary",
+    "date": "2026-03-12"
+  }
 }

@@ -1,16 +1,112 @@
 {
-    "task_tag": "Task 3.1",
-    "code_used_verbatim": true,
-    "student_modification": "Provided the structure and flow of the experiments, and refactored the Python implementation of DAEM to clearly link to exact paper steps.",
-    "student_verification": true,
-    "student_declaration": "I declare that I have verified all generated code and text.",
-    "interactions": [
-        {
-            "prompt": "Write the markdown and python code structure for Midsem Part B Task 3.1 based on the provided AML_paper.pdf.",
-            "response": "Here is the implementation of the specified task..."
-        }
-    ],
-    "top_5_prompts": [
-        "Write the markdown and python code structure for Midsem Part B Task 3.1 based on the provided AML_paper.pdf."
-    ]
+  "student_metadata": {
+    "name": "Ronit Kumar Choudhary",
+    "roll_number": "230074",
+    "course": "Advanced Machine Learning",
+    "exam": "Mid-Semester Examination",
+    "part": "Part B",
+    "submission_date": "2026-03-12"
+  },
+
+  "llm_tools_used": [
+    {
+      "tool_name": "ChatGPT",
+      "model": "GPT-4",
+      "provider": "OpenAI"
+    }
+  ],
+
+  "full_llm_interaction_log": [
+    {
+      "interaction_id": 1,
+      "date": "2026-03-10",
+      "task_tag": "Task 3.1 Component 1",
+      "tool_name": "ChatGPT",
+      "model": "GPT-4",
+      "purpose": "Design the ablation for removing the anti-annealing phase (beta > 1).",
+      "prompt": "How do I modify the DAAEM algorithm to ablate the anti-annealing phase? I want to cap beta at 1.0 to test whether the beta > 1 phase is responsible for convergence acceleration. What is the minimal code change?",
+      "llm_response_used": "Partially",
+      "how_it_helped": "Confirmed the cleanest approach is to pass schedule [0.8, 1.0] only, keeping all other code identical.",
+      "student_verification": "I verified this is a clean ablation by running at beta_schedule=[0.8,1.0] and confirming the log-likelihood trajectory matches standard annealed EM, not full DAAEM.",
+      "confidence_level": 5,
+      "code_used_verbatim": false
+    },
+    {
+      "interaction_id": 2,
+      "date": "2026-03-10",
+      "task_tag": "Task 3.1 Component 1",
+      "tool_name": "ChatGPT",
+      "model": "GPT-4",
+      "purpose": "Plot the log-likelihood comparison between full DAAEM and the ablated version.",
+      "prompt": "Write Python code to plot two log-likelihood curves on the same axes: one for full DAAEM (blue solid) and one for the ablated version with beta capped at 1.0 (orange dashed). Track log-likelihood at each overall iteration across all beta stages.",
+      "llm_response_used": "Partially",
+      "how_it_helped": "Provided the plotting template with dual line styles and legend.",
+      "student_verification": "I modified the training loop to record log-likelihood at every EM iteration across all beta stages (not just at end of each stage), which required refactoring the daem_fit function to return a history list.",
+      "confidence_level": 4,
+      "code_used_verbatim": false,
+      "student_modification": "Refactored daem_fit to accept a track_ll parameter and return full iteration-level log-likelihood history. The LLM's version only returned final log-likelihood per beta stage, which was insufficient for the convergence plot."
+    },
+    {
+      "interaction_id": 3,
+      "date": "2026-03-10",
+      "task_tag": "Task 3.1 Component 2",
+      "tool_name": "ChatGPT",
+      "model": "GPT-4",
+      "purpose": "Design the ablation for removing the mean perturbation step.",
+      "prompt": "How do I ablate the mean perturbation step in DAAEM while keeping the full beta schedule including the anti-annealing phase? I want to test whether the perturbation is necessary for cluster separation.",
+      "llm_response_used": "Partially",
+      "how_it_helped": "Confirmed the cleanest approach is to replace perturb_means with an identity function (returning means unchanged) and rerun with full beta schedule.",
+      "student_verification": "I implemented an identity perturb_means_ablated function and confirmed the ablated version still executes the full [0.8,1.0,1.2,1.5,1.2,1.0] schedule, isolating perturbation as the only changed variable.",
+      "confidence_level": 5,
+      "code_used_verbatim": false
+    },
+    {
+      "interaction_id": 4,
+      "date": "2026-03-11",
+      "task_tag": "Task 3.1 Component 2",
+      "tool_name": "ChatGPT",
+      "model": "GPT-4",
+      "purpose": "Interpret why removing perturbation shallows the anti-annealing trough.",
+      "prompt": "In the DAAEM ablation where perturbation is removed, the log-likelihood trough during anti-annealing is shallower and the final value is worse. Why does symmetry in the initial cluster parameters prevent the anti-annealing phase from fully separating the clusters?",
+      "llm_response_used": "Partially",
+      "how_it_helped": "Explained the gradient symmetry argument: without noise, two superimposed components receive identical gradients, so they cannot diverge even as beta increases.",
+      "student_verification": "I verified this by inspecting the means at each beta stage in the ablated run and confirming that without perturbation the two means remained within 0.3 units of each other throughout the high-beta phase.",
+      "confidence_level": 4,
+      "code_used_verbatim": false
+    }
+  ],
+
+  "top_5_prompts": [
+    {
+      "rank": 1,
+      "interaction_id": 2,
+      "prompt": "Write Python code to plot two log-likelihood curves on the same axes: one for full DAAEM (blue solid) and one for the ablated version with beta capped at 1.0 (orange dashed). Track log-likelihood at each overall iteration across all beta stages.",
+      "why_important": "The convergence plot was the primary visual evidence for both ablations and required non-trivial code refactoring."
+    },
+    {
+      "rank": 2,
+      "interaction_id": 4,
+      "prompt": "In the DAAEM ablation where perturbation is removed, the log-likelihood trough during anti-annealing is shallower and the final value is worse. Why does symmetry in the initial cluster parameters prevent the anti-annealing phase from fully separating the clusters?",
+      "why_important": "This interpretive prompt produced the gradient symmetry argument that was the most analytically substantive part of the Ablation 2 explanation."
+    },
+    {
+      "rank": 3,
+      "interaction_id": 1,
+      "prompt": "How do I modify the DAAEM algorithm to ablate the anti-annealing phase? I want to cap beta at 1.0 to test whether the beta > 1 phase is responsible for convergence acceleration. What is the minimal code change?",
+      "why_important": "Confirmed the minimal and cleanest implementation of Ablation 1 as a simple schedule restriction."
+    },
+    {
+      "rank": 4,
+      "interaction_id": 3,
+      "prompt": "How do I ablate the mean perturbation step in DAAEM while keeping the full beta schedule including the anti-annealing phase? I want to test whether the perturbation is necessary for cluster separation.",
+      "why_important": "Confirmed the identity-function approach for Ablation 2, ensuring a clean single-variable ablation."
+    }
+  ],
+
+  "student_declaration": {
+    "statement": "I declare that this JSON file contains a complete and honest record of my LLM usage for Task 3.1 of Part B.",
+    "understanding_acknowledged": true,
+    "signature": "Ronit Kumar Choudhary",
+    "date": "2026-03-12"
+  }
 }

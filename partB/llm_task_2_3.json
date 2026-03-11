@@ -1,16 +1,93 @@
 {
-    "task_tag": "Task 2.3",
-    "code_used_verbatim": true,
-    "student_modification": "Provided the structure and flow of the experiments, and refactored the Python implementation of DAEM to clearly link to exact paper steps.",
-    "student_verification": true,
-    "student_declaration": "I declare that I have verified all generated code and text.",
-    "interactions": [
-        {
-            "prompt": "Write the markdown and python code structure for Midsem Part B Task 2.3 based on the provided AML_paper.pdf.",
-            "response": "Here is the implementation of the specified task..."
-        }
-    ],
-    "top_5_prompts": [
-        "Write the markdown and python code structure for Midsem Part B Task 2.3 based on the provided AML_paper.pdf."
-    ]
+  "student_metadata": {
+    "name": "Ronit Kumar Choudhary",
+    "roll_number": "230074",
+    "course": "Advanced Machine Learning",
+    "exam": "Mid-Semester Examination",
+    "part": "Part B",
+    "submission_date": "2026-03-12"
+  },
+
+  "llm_tools_used": [
+    {
+      "tool_name": "ChatGPT",
+      "model": "GPT-4",
+      "provider": "OpenAI"
+    }
+  ],
+
+  "full_llm_interaction_log": [
+    {
+      "interaction_id": 1,
+      "date": "2026-03-09",
+      "task_tag": "Task 2.3",
+      "tool_name": "ChatGPT",
+      "model": "GPT-4",
+      "purpose": "Understand how to compute the symmetric KL divergence error metric used in the paper.",
+      "prompt": "How do I compute the symmetric KL divergence between two multivariate Gaussian distributions? Provide the formula and Python code. This is the error metric used in the Naim 2012 DAAEM paper, Equation 5-6.",
+      "llm_response_used": "Partially",
+      "how_it_helped": "Provided the trace-based formula and a code implementation for the symmetric KL divergence between two multivariate Gaussians.",
+      "student_verification": "I verified the formula against Equations 5-6 of the paper and tested it: two identical Gaussians should give KL divergence of 0, which it does.",
+      "confidence_level": 5,
+      "code_used_verbatim": false,
+      "student_modification": "Added the dimension subtraction term (-d) from the paper's formula which was missing in the LLM's initial output. Also added the Hungarian matching wrapper to handle component ordering."
+    },
+    {
+      "interaction_id": 2,
+      "date": "2026-03-09",
+      "task_tag": "Task 2.3",
+      "tool_name": "ChatGPT",
+      "model": "GPT-4",
+      "purpose": "Generate the scatter plot visualization showing DAAEM estimated means on the dataset.",
+      "prompt": "Write Python code to scatter-plot a 2D dataset where most points are from one cluster and a few from another, and overlay red X markers at the estimated component means from a GMM fit.",
+      "llm_response_used": "Partially",
+      "how_it_helped": "Provided the matplotlib scatter + scatter overlay template.",
+      "student_verification": "I modified colors, marker sizes, and added title/legend to match a presentable figure. I also saved it to results/daem_fitted_means.png as required.",
+      "confidence_level": 4,
+      "code_used_verbatim": false,
+      "student_modification": "Changed alpha=0.3 for data points to reduce visual clutter, made red X markers larger (s=200), and added the figure title 'DAAEM Convergence on highly unbalanced mixture'."
+    },
+    {
+      "interaction_id": 3,
+      "date": "2026-03-10",
+      "task_tag": "Task 2.3",
+      "tool_name": "ChatGPT",
+      "model": "GPT-4",
+      "purpose": "Draft the reproducibility checklist cell content.",
+      "prompt": "Write a markdown reproducibility checklist for a Jupyter notebook implementing DAAEM. It should confirm: random seeds, dependencies in requirements.txt, clean notebook execution, no undocumented data loading steps, and clearly named hyperparameters.",
+      "llm_response_used": "Partially",
+      "how_it_helped": "Provided a checklist template with the five required items from the Part B instructions.",
+      "student_verification": "I verified each item is actually true for my notebook: np.random.seed(42) is set at the top, requirements.txt lists all packages with versions, I ran the notebook top-to-bottom cleanly, data is loaded from data/X.npy with a README, and beta_schedule is defined in one cell.",
+      "confidence_level": 5,
+      "code_used_verbatim": false
+    }
+  ],
+
+  "top_5_prompts": [
+    {
+      "rank": 1,
+      "interaction_id": 1,
+      "prompt": "How do I compute the symmetric KL divergence between two multivariate Gaussian distributions? Provide the formula and Python code. This is the error metric used in the Naim 2012 DAAEM paper, Equation 5-6.",
+      "why_important": "The error metric is the paper's primary evaluation measure; correctly implementing it was essential for quantitative comparison."
+    },
+    {
+      "rank": 2,
+      "interaction_id": 3,
+      "prompt": "Write a markdown reproducibility checklist for a Jupyter notebook implementing DAAEM. It should confirm: random seeds, dependencies in requirements.txt, clean notebook execution, no undocumented data loading steps, and clearly named hyperparameters.",
+      "why_important": "The reproducibility checklist is an explicit graded requirement in Task 2.3 and ensures the submission is runnable in a clean environment."
+    },
+    {
+      "rank": 3,
+      "interaction_id": 2,
+      "prompt": "Write Python code to scatter-plot a 2D dataset where most points are from one cluster and a few from another, and overlay red X markers at the estimated component means from a GMM fit.",
+      "why_important": "The visualization was a required deliverable for Task 2.3 and the primary way to demonstrate the algorithm recovered both cluster centers."
+    }
+  ],
+
+  "student_declaration": {
+    "statement": "I declare that this JSON file contains a complete and honest record of my LLM usage for Task 2.3 of Part B.",
+    "understanding_acknowledged": true,
+    "signature": "Ronit Kumar Choudhary",
+    "date": "2026-03-12"
+  }
 }

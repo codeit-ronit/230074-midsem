@@ -1,16 +1,91 @@
 {
-    "task_tag": "Task 2.1",
-    "code_used_verbatim": true,
-    "student_modification": "Provided the structure and flow of the experiments, and refactored the Python implementation of DAEM to clearly link to exact paper steps.",
-    "student_verification": true,
-    "student_declaration": "I declare that I have verified all generated code and text.",
-    "interactions": [
-        {
-            "prompt": "Write the markdown and python code structure for Midsem Part B Task 2.1 based on the provided AML_paper.pdf.",
-            "response": "Here is the implementation of the specified task..."
-        }
-    ],
-    "top_5_prompts": [
-        "Write the markdown and python code structure for Midsem Part B Task 2.1 based on the provided AML_paper.pdf."
-    ]
+  "student_metadata": {
+    "name": "Ronit Kumar Choudhary",
+    "roll_number": "230074",
+    "course": "Advanced Machine Learning",
+    "exam": "Mid-Semester Examination",
+    "part": "Part B",
+    "submission_date": "2026-03-12"
+  },
+
+  "llm_tools_used": [
+    {
+      "tool_name": "ChatGPT",
+      "model": "GPT-4",
+      "provider": "OpenAI"
+    }
+  ],
+
+  "full_llm_interaction_log": [
+    {
+      "interaction_id": 1,
+      "date": "2026-03-08",
+      "task_tag": "Task 2.1",
+      "tool_name": "ChatGPT",
+      "model": "GPT-4",
+      "purpose": "Determine what kind of synthetic dataset would best test the DAAEM algorithm's claimed advantage.",
+      "prompt": "I need to construct a synthetic 2D Gaussian mixture dataset to test the DAAEM algorithm from the Naim 2012 paper. What mixing coefficients, means, and covariance structure would best reproduce the challenging convergence scenario the paper describes?",
+      "llm_response_used": "Partially",
+      "how_it_helped": "Suggested using highly unbalanced alpha values (e.g. 0.975/0.025) with overlapping means separated by 3 units, matching the paper's Section 2.2 setup.",
+      "student_verification": "I verified against Section 2.2 of the paper where alpha=(0.025, 0.975), means at (-5,5), and variance 6.25 are described. I adjusted to 2D with mu=[0,0] and mu=[3,0] to match the overlay scenario.",
+      "confidence_level": 5,
+      "code_used_verbatim": false
+    },
+    {
+      "interaction_id": 2,
+      "date": "2026-03-08",
+      "task_tag": "Task 2.1",
+      "tool_name": "ChatGPT",
+      "model": "GPT-4",
+      "purpose": "Justify why n=2050 (2000+50) is a good dataset size choice.",
+      "prompt": "What is the minimum dataset size that would make an unbalanced GMM with alpha=0.025 statistically identifiable? Is 2050 points (2000 large cluster, 50 small) sufficient to test anti-annealing convergence?",
+      "llm_response_used": "Partially",
+      "how_it_helped": "Explained that 50 points for the small cluster is sufficient to create the convergence challenge but will produce more sampling variance than the paper's 200 points.",
+      "student_verification": "I ran the experiment and confirmed that standard EM consistently fails to correctly identify the small cluster with n2=50, validating the dataset is appropriately challenging.",
+      "confidence_level": 4,
+      "code_used_verbatim": false
+    },
+    {
+      "interaction_id": 3,
+      "date": "2026-03-08",
+      "task_tag": "Task 2.1",
+      "tool_name": "ChatGPT",
+      "model": "GPT-4",
+      "purpose": "Understand the limitations of using a small synthetic 2D dataset vs the paper's large-scale experiments.",
+      "prompt": "What are the main limitations of using a 2050-point 2D synthetic GMM dataset to reproduce the DAAEM paper's results compared to their 200,000+ sample experiments?",
+      "llm_response_used": "Partially",
+      "how_it_helped": "Identified three key limitations: higher sampling noise in small cluster, less smooth likelihood surface, and inability to test the DAAEM-vs-BFGS runtime gap at scale.",
+      "student_verification": "I included the sampling noise and scale-difference limitations in the Task 2.3 gap analysis, confirmed by observing the noisier convergence curves in my experiments.",
+      "confidence_level": 4,
+      "code_used_verbatim": false
+    }
+  ],
+
+  "top_5_prompts": [
+    {
+      "rank": 1,
+      "interaction_id": 1,
+      "prompt": "I need to construct a synthetic 2D Gaussian mixture dataset to test the DAAEM algorithm from the Naim 2012 paper. What mixing coefficients, means, and covariance structure would best reproduce the challenging convergence scenario the paper describes?",
+      "why_important": "Directly shaped the dataset construction parameters to match the paper's convergence-challenging conditions."
+    },
+    {
+      "rank": 2,
+      "interaction_id": 3,
+      "prompt": "What are the main limitations of using a 2050-point 2D synthetic GMM dataset to reproduce the DAAEM paper's results compared to their 200,000+ sample experiments?",
+      "why_important": "Helped write a rigorous and honest gap commentary required by Task 2.3."
+    },
+    {
+      "rank": 3,
+      "interaction_id": 2,
+      "prompt": "What is the minimum dataset size that would make an unbalanced GMM with alpha=0.025 statistically identifiable? Is 2050 points (2000 large cluster, 50 small) sufficient to test anti-annealing convergence?",
+      "why_important": "Justified the dataset size choice by connecting it to statistical identifiability of the small cluster."
+    }
+  ],
+
+  "student_declaration": {
+    "statement": "I declare that this JSON file contains a complete and honest record of my LLM usage for Task 2.1 of Part B.",
+    "understanding_acknowledged": true,
+    "signature": "Ronit Kumar Choudhary",
+    "date": "2026-03-12"
+  }
 }

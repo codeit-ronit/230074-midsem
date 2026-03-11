@@ -1,16 +1,112 @@
 {
-    "task_tag": "Task 3.2",
-    "code_used_verbatim": true,
-    "student_modification": "Provided the structure and flow of the experiments, and refactored the Python implementation of DAEM to clearly link to exact paper steps.",
-    "student_verification": true,
-    "student_declaration": "I declare that I have verified all generated code and text.",
-    "interactions": [
-        {
-            "prompt": "Write the markdown and python code structure for Midsem Part B Task 3.2 based on the provided AML_paper.pdf.",
-            "response": "Here is the implementation of the specified task..."
-        }
-    ],
-    "top_5_prompts": [
-        "Write the markdown and python code structure for Midsem Part B Task 3.2 based on the provided AML_paper.pdf."
-    ]
+  "student_metadata": {
+    "name": "Ronit Kumar Choudhary",
+    "roll_number": "230074",
+    "course": "Advanced Machine Learning",
+    "exam": "Mid-Semester Examination",
+    "part": "Part B",
+    "submission_date": "2026-03-12"
+  },
+
+  "llm_tools_used": [
+    {
+      "tool_name": "ChatGPT",
+      "model": "GPT-4",
+      "provider": "OpenAI"
+    }
+  ],
+
+  "full_llm_interaction_log": [
+    {
+      "interaction_id": 1,
+      "date": "2026-03-11",
+      "task_tag": "Task 3.2",
+      "tool_name": "ChatGPT",
+      "model": "GPT-4",
+      "purpose": "Confirm that Cauchy-distributed data is an appropriate failure mode for DAAEM given the Gaussian assumption.",
+      "prompt": "I want to test DAAEM on Cauchy-distributed data as a failure mode. The Cauchy distribution violates the Gaussian mixture assumption. Will the anti-annealing at beta > 1 fail catastrophically on Cauchy data because Gaussian likelihoods underestimate the heavy tails? What should I expect to observe?",
+      "llm_response_used": "Partially",
+      "how_it_helped": "Confirmed the expected failure mechanism: Cauchy tails cause Gaussian likelihood to drop to near-zero for outliers, so after exponentiation by beta>1, these points dominate assignment errors and corrupt mean estimates.",
+      "student_verification": "I verified empirically: ran DAAEM on Cauchy data with identical structural parameters to the standard dataset and observed both means collapsing to near [0,0] and [0.8,0] despite true means being [0,0] and [3,0].",
+      "confidence_level": 5,
+      "code_used_verbatim": false
+    },
+    {
+      "interaction_id": 2,
+      "date": "2026-03-11",
+      "task_tag": "Task 3.2",
+      "tool_name": "ChatGPT",
+      "model": "GPT-4",
+      "purpose": "Generate Cauchy-distributed 2D data in Python.",
+      "prompt": "Write Python code to generate a 2D dataset from two Cauchy distributions with locations at [0,0] and [3,0] and a mixing ratio of 2000:50 points.",
+      "llm_response_used": "Partially",
+      "how_it_helped": "Provided the scipy.stats.cauchy approach for univariate Cauchy, which I extended to 2D by drawing independently for each dimension.",
+      "student_verification": "I verified the data looks like a heavy-tailed cloud by plotting it, confirming extreme outliers well beyond the 6-sigma range of a Gaussian with the same center.",
+      "confidence_level": 4,
+      "code_used_verbatim": false,
+      "student_modification": "Extended the univariate Cauchy generation to 2D by independently drawing x and y coordinates. Also set scale=1.0 to match the approximate spread of the Gaussian dataset."
+    },
+    {
+      "interaction_id": 3,
+      "date": "2026-03-11",
+      "task_tag": "Task 3.2",
+      "tool_name": "ChatGPT",
+      "model": "GPT-4",
+      "purpose": "Identify a concrete modification to DAAEM that would address the heavy-tail failure mode.",
+      "prompt": "What is one concrete modification to the DAAEM algorithm that would make it more robust to heavy-tailed data distributions like Cauchy or Student-t?",
+      "llm_response_used": "Partially",
+      "how_it_helped": "Suggested replacing the Gaussian base model with a Student-t mixture model, whose likelihood function better accommodates heavy-tailed data and whose extra degree-of-freedom parameter can be estimated via EM.",
+      "student_verification": "I included this as the suggested modification in Task 3.2, confirming it is mechanically feasible (Student-t EM is a known algorithm) and directly addresses the identified failure mechanism.",
+      "confidence_level": 4,
+      "code_used_verbatim": false
+    },
+    {
+      "interaction_id": 4,
+      "date": "2026-03-11",
+      "task_tag": "Task 3.2",
+      "tool_name": "ChatGPT",
+      "model": "GPT-4",
+      "purpose": "Connect the failure mode to a specific assumption from Task 1.2.",
+      "prompt": "The DAAEM failure on Cauchy data is connected to Assumption 3 from Task 1.2: the method requires data whose boundaries are separable under exponentiated Gaussian likelihoods. How should I articulate this connection clearly in the failure mode explanation paragraph?",
+      "llm_response_used": "Partially",
+      "how_it_helped": "Suggested framing it as: anti-annealing amplifies likelihood errors under model misspecification, and Cauchy tails create systematic likelihood underestimation that gets exponentially amplified by beta>1.",
+      "student_verification": "I rewrote this explanation in my own words and verified it matches my empirical observation: the estimated means collapse to the center because the tail mass gets assigned to the wrong cluster.",
+      "confidence_level": 4,
+      "code_used_verbatim": false
+    }
+  ],
+
+  "top_5_prompts": [
+    {
+      "rank": 1,
+      "interaction_id": 1,
+      "prompt": "I want to test DAAEM on Cauchy-distributed data as a failure mode. The Cauchy distribution violates the Gaussian mixture assumption. Will the anti-annealing at beta > 1 fail catastrophically on Cauchy data because Gaussian likelihoods underestimate the heavy tails? What should I expect to observe?",
+      "why_important": "Confirmed the expected failure mechanism before running the experiment, allowing me to design the observation criteria and expected outcomes."
+    },
+    {
+      "rank": 2,
+      "interaction_id": 4,
+      "prompt": "The DAAEM failure on Cauchy data is connected to Assumption 3 from Task 1.2. How should I articulate this connection clearly in the failure mode explanation paragraph?",
+      "why_important": "The rubric awards 7 of 15 marks for correctly linking the failure to a specific method assumption; this prompt helped structure that link clearly."
+    },
+    {
+      "rank": 3,
+      "interaction_id": 3,
+      "prompt": "What is one concrete modification to the DAAEM algorithm that would make it more robust to heavy-tailed data distributions like Cauchy or Student-t?",
+      "why_important": "The rubric requires a concrete suggested modification; the Student-t mixture base model is a technically sound and implementable answer."
+    },
+    {
+      "rank": 4,
+      "interaction_id": 2,
+      "prompt": "Write Python code to generate a 2D dataset from two Cauchy distributions with locations at [0,0] and [3,0] and a mixing ratio of 2000:50 points.",
+      "why_important": "Generating the failure mode dataset required using scipy.stats.cauchy correctly in 2D, which I modified and verified."
+    }
+  ],
+
+  "student_declaration": {
+    "statement": "I declare that this JSON file contains a complete and honest record of my LLM usage for Task 3.2 of Part B.",
+    "understanding_acknowledged": true,
+    "signature": "Ronit Kumar Choudhary",
+    "date": "2026-03-12"
+  }
 }

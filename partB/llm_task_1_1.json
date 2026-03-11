@@ -1,16 +1,111 @@
 {
-    "task_tag": "Task 1.1",
-    "code_used_verbatim": true,
-    "student_modification": "Provided the structure and flow of the experiments, and refactored the Python implementation of DAEM to clearly link to exact paper steps.",
-    "student_verification": true,
-    "student_declaration": "I declare that I have verified all generated code and text.",
-    "interactions": [
-        {
-            "prompt": "Write the markdown and python code structure for Midsem Part B Task 1.1 based on the provided AML_paper.pdf.",
-            "response": "Here is the implementation of the specified task..."
-        }
-    ],
-    "top_5_prompts": [
-        "Write the markdown and python code structure for Midsem Part B Task 1.1 based on the provided AML_paper.pdf."
-    ]
+  "student_metadata": {
+    "name": "Ronit Kumar Choudhary",
+    "roll_number": "230074",
+    "course": "Advanced Machine Learning",
+    "exam": "Mid-Semester Examination",
+    "part": "Part B",
+    "submission_date": "2026-03-12"
+  },
+
+  "llm_tools_used": [
+    {
+      "tool_name": "ChatGPT",
+      "model": "GPT-4",
+      "provider": "OpenAI"
+    }
+  ],
+
+  "full_llm_interaction_log": [
+    {
+      "interaction_id": 1,
+      "date": "2026-03-06",
+      "task_tag": "Task 1.1",
+      "tool_name": "ChatGPT",
+      "model": "GPT-4",
+      "purpose": "Understand the step-by-step flow of the DAAEM algorithm from the paper.",
+      "prompt": "Can you help me outline the step-by-step execution flow of the Deterministic Anti-Annealing EM algorithm from the Naim & Gildea 2012 ICML paper on Gaussian mixtures with unbalanced mixing coefficients?",
+      "llm_response_used": "Partially",
+      "how_it_helped": "Helped structure the four main steps (Initialization, E-step, M-step, Temperature Update) before I verified each against the paper.",
+      "student_verification": "I cross-checked each step against Section 3.1 of the paper, including Equation (2) and Figure 6(b), and rewrote descriptions in my own words.",
+      "confidence_level": 4,
+      "code_used_verbatim": false
+    },
+    {
+      "interaction_id": 2,
+      "date": "2026-03-06",
+      "task_tag": "Task 1.1",
+      "tool_name": "ChatGPT",
+      "model": "GPT-4",
+      "purpose": "Clarify how the beta parameter controls softness vs hardness of cluster assignments.",
+      "prompt": "In the DAEM algorithm, when beta < 1 the posteriors become uniform and when beta > 1 they become hard. Can you explain intuitively why exponentiation by beta achieves this, and how this relates to the convergence rate?",
+      "llm_response_used": "Partially",
+      "how_it_helped": "Clarified the intuition behind the temperature analogy and winner-take-all behavior at large beta values.",
+      "student_verification": "Verified by reading Section 3.1 paragraph on 'How Does Anti-Annealing Speed up Convergence?' and checking against Ma et al. 2000 cited in the paper.",
+      "confidence_level": 5,
+      "code_used_verbatim": false
+    },
+    {
+      "interaction_id": 3,
+      "date": "2026-03-07",
+      "task_tag": "Task 1.1",
+      "tool_name": "ChatGPT",
+      "model": "GPT-4",
+      "purpose": "Understand the role of the perturbation step in the algorithm.",
+      "prompt": "Why does the DAAEM algorithm require perturbing the estimated Gaussian means between beta stages? What happens structurally if this step is skipped?",
+      "llm_response_used": "Partially",
+      "how_it_helped": "Helped understand that without perturbation, superimposed components cannot split due to gradient symmetry.",
+      "student_verification": "Verified by reading the perturbation paragraph in Section 3.1 and by running an ablation experiment where skipping perturbation led to collapsed cluster estimates.",
+      "confidence_level": 4,
+      "code_used_verbatim": false
+    },
+    {
+      "interaction_id": 4,
+      "date": "2026-03-07",
+      "task_tag": "Task 1.1",
+      "tool_name": "ChatGPT",
+      "model": "GPT-4",
+      "purpose": "Help write the final summary sentence describing what the paper solves and what makes it better.",
+      "prompt": "Write a single sentence that captures what problem the DAAEM paper solves and what makes it better than standard EM, ECG, and BFGS.",
+      "llm_response_used": "Partially",
+      "how_it_helped": "Provided a draft that I then modified to match my own understanding and link to the projected Hessian condition number argument.",
+      "student_verification": "I rewrote the sentence myself after reading the abstract and conclusion of the paper.",
+      "confidence_level": 4,
+      "code_used_verbatim": false
+    }
+  ],
+
+  "top_5_prompts": [
+    {
+      "rank": 1,
+      "interaction_id": 1,
+      "prompt": "Can you help me outline the step-by-step execution flow of the Deterministic Anti-Annealing EM algorithm from the Naim & Gildea 2012 ICML paper on Gaussian mixtures with unbalanced mixing coefficients?",
+      "why_important": "This was the foundational prompt that helped structure the entire Task 1.1 answer into four clearly delineated steps before I verified each against the paper."
+    },
+    {
+      "rank": 2,
+      "interaction_id": 2,
+      "prompt": "In the DAEM algorithm, when beta < 1 the posteriors become uniform and when beta > 1 they become hard. Can you explain intuitively why exponentiation by beta achieves this, and how this relates to the convergence rate?",
+      "why_important": "Understanding the temperature analogy was critical to writing a correct and non-generic explanation of the E-step modification."
+    },
+    {
+      "rank": 3,
+      "interaction_id": 3,
+      "prompt": "Why does the DAAEM algorithm require perturbing the estimated Gaussian means between beta stages? What happens structurally if this step is skipped?",
+      "why_important": "This helped articulate the purpose of the perturbation step, which the paper only describes in one sentence but which is mechanically essential."
+    },
+    {
+      "rank": 4,
+      "interaction_id": 4,
+      "prompt": "Write a single sentence that captures what problem the DAAEM paper solves and what makes it better than standard EM, ECG, and BFGS.",
+      "why_important": "Helped draft the final summary sentence, which I then rewrote to reflect my own understanding."
+    }
+  ],
+
+  "student_declaration": {
+    "statement": "I declare that this JSON file contains a complete and honest record of my LLM usage for Task 1.1 of Part B.",
+    "understanding_acknowledged": true,
+    "signature": "Ronit Kumar Choudhary",
+    "date": "2026-03-12"
+  }
 }

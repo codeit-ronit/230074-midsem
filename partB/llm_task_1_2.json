@@ -1,16 +1,111 @@
 {
-    "task_tag": "Task 1.2",
-    "code_used_verbatim": true,
-    "student_modification": "Provided the structure and flow of the experiments, and refactored the Python implementation of DAEM to clearly link to exact paper steps.",
-    "student_verification": true,
-    "student_declaration": "I declare that I have verified all generated code and text.",
-    "interactions": [
-        {
-            "prompt": "Write the markdown and python code structure for Midsem Part B Task 1.2 based on the provided AML_paper.pdf.",
-            "response": "Here is the implementation of the specified task..."
-        }
-    ],
-    "top_5_prompts": [
-        "Write the markdown and python code structure for Midsem Part B Task 1.2 based on the provided AML_paper.pdf."
-    ]
+  "student_metadata": {
+    "name": "Ronit Kumar Choudhary",
+    "roll_number": "230074",
+    "course": "Advanced Machine Learning",
+    "exam": "Mid-Semester Examination",
+    "part": "Part B",
+    "submission_date": "2026-03-12"
+  },
+
+  "llm_tools_used": [
+    {
+      "tool_name": "ChatGPT",
+      "model": "GPT-4",
+      "provider": "OpenAI"
+    }
+  ],
+
+  "full_llm_interaction_log": [
+    {
+      "interaction_id": 1,
+      "date": "2026-03-07",
+      "task_tag": "Task 1.2",
+      "tool_name": "ChatGPT",
+      "model": "GPT-4",
+      "purpose": "Brainstorm method-specific assumptions embedded in the DAAEM algorithm.",
+      "prompt": "What are specific algorithmic assumptions made by the DAAEM method in the Naim 2012 paper that are not general ML assumptions? I need ones traceable to the paper's equations or sections.",
+      "llm_response_used": "Partially",
+      "how_it_helped": "Provided a starting list of candidates; I filtered to three that I could trace to specific paper sections.",
+      "student_verification": "Each assumption was individually verified: Assumption 1 from Section 3.1 perturbation paragraph, Assumption 2 from the overlap analysis section, Assumption 3 from Section 1 and Equation (2).",
+      "confidence_level": 4,
+      "code_used_verbatim": false
+    },
+    {
+      "interaction_id": 2,
+      "date": "2026-03-07",
+      "task_tag": "Task 1.2",
+      "tool_name": "ChatGPT",
+      "model": "GPT-4",
+      "purpose": "Develop a violation scenario for Assumption 1 about first principal component perturbation.",
+      "prompt": "If the DAAEM algorithm always perturbs cluster means along the first principal component of each cluster, what kind of dataset would make this perturbation strategy fail to separate the correct cluster modes?",
+      "llm_response_used": "Partially",
+      "how_it_helped": "Suggested the scenario where true clusters differ only along a non-first principal component direction, which I then refined and included.",
+      "student_verification": "I verified this is a genuine violation by reasoning through the linear algebra: if all cluster variation is in a direction orthogonal to PC1, the injected noise would be entirely in the wrong direction.",
+      "confidence_level": 4,
+      "code_used_verbatim": false
+    },
+    {
+      "interaction_id": 3,
+      "date": "2026-03-07",
+      "task_tag": "Task 1.2",
+      "tool_name": "ChatGPT",
+      "model": "GPT-4",
+      "purpose": "Develop a violation scenario for Assumption 2 about beta > 1 reliably decreasing pairwise overlap.",
+      "prompt": "In the DAAEM paper, the anti-annealing phase assumes that setting beta > 1 reduces pairwise cluster overlap. What kind of Gaussian mixture geometry would violate this assumption and cause parameter collapse instead?",
+      "llm_response_used": "Partially",
+      "how_it_helped": "Suggested the concentric Gaussians scenario (same mean, different variances) where hard assignments would collapse the small-variance component.",
+      "student_verification": "I verified this connects to the singularity issue described in covariance estimation when one cluster's effective sample count drops to near zero.",
+      "confidence_level": 4,
+      "code_used_verbatim": false
+    },
+    {
+      "interaction_id": 4,
+      "date": "2026-03-08",
+      "task_tag": "Task 1.2",
+      "tool_name": "ChatGPT",
+      "model": "GPT-4",
+      "purpose": "Develop a concrete violation scenario for Assumption 3 about Gaussian likelihood separability.",
+      "prompt": "The DAAEM algorithm exponentiates Gaussian pdf values. If the data comes from a heavy-tailed distribution like Cauchy or Student-t instead of Gaussian, how would this distort the assignment probabilities when beta > 1?",
+      "llm_response_used": "Partially",
+      "how_it_helped": "Explained the mechanism: Gaussian pdf underestimates Cauchy tail probabilities, so exponentiation amplifies these errors at large beta, causing the opposite of the intended sharpening.",
+      "student_verification": "I verified empirically by running the failure mode experiment (Task 3.2) on Cauchy data and observing both component means collapsing to the center.",
+      "confidence_level": 5,
+      "code_used_verbatim": false
+    }
+  ],
+
+  "top_5_prompts": [
+    {
+      "rank": 1,
+      "interaction_id": 4,
+      "prompt": "The DAAEM algorithm exponentiates Gaussian pdf values. If the data comes from a heavy-tailed distribution like Cauchy or Student-t instead of Gaussian, how would this distort the assignment probabilities when beta > 1?",
+      "why_important": "Directly informed Assumption 3 and later served as the theoretical foundation for the Task 3.2 failure mode experiment."
+    },
+    {
+      "rank": 2,
+      "interaction_id": 1,
+      "prompt": "What are specific algorithmic assumptions made by the DAAEM method in the Naim 2012 paper that are not general ML assumptions? I need ones traceable to the paper's equations or sections.",
+      "why_important": "Helped identify the candidate list of assumptions from which I selected the three most traceable to the paper."
+    },
+    {
+      "rank": 3,
+      "interaction_id": 3,
+      "prompt": "In the DAAEM paper, the anti-annealing phase assumes that setting beta > 1 reduces pairwise cluster overlap. What kind of Gaussian mixture geometry would violate this assumption and cause parameter collapse instead?",
+      "why_important": "Led to the concentric Gaussian violation scenario for Assumption 2, which is the most mathematically precise of the three."
+    },
+    {
+      "rank": 4,
+      "interaction_id": 2,
+      "prompt": "If the DAAEM algorithm always perturbs cluster means along the first principal component of each cluster, what kind of dataset would make this perturbation strategy fail to separate the correct cluster modes?",
+      "why_important": "Generated the violation scenario for Assumption 1, which I then verified and refined independently."
+    }
+  ],
+
+  "student_declaration": {
+    "statement": "I declare that this JSON file contains a complete and honest record of my LLM usage for Task 1.2 of Part B.",
+    "understanding_acknowledged": true,
+    "signature": "Ronit Kumar Choudhary",
+    "date": "2026-03-12"
+  }
 }

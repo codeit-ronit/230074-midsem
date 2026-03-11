@@ -1,4 +1,4 @@
-# Dataset Documentation
+# Toy Dataset Documentation
 
 This dataset was synthetically generated to test the Deterministic Anti-Annealing EM algorithm for Gaussian mixtures with heavily unbalanced mixing coefficients. 
 
