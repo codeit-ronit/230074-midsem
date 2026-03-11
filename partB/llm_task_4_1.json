@@ -1,0 +1,16 @@
+{
+    "task_tag": "Task 4.1",
+    "code_used_verbatim": true,
+    "student_modification": "Provided the structure and flow of the experiments, and refactored the Python implementation of DAEM to clearly link to exact paper steps.",
+    "student_verification": true,
+    "student_declaration": "I declare that I have verified all generated code and text.",
+    "interactions": [
+        {
+            "prompt": "Write the markdown and python code structure for Midsem Part B Task 4.1 based on the provided AML_paper.pdf.",
+            "response": "Here is the implementation of the specified task..."
+        }
+    ],
+    "top_5_prompts": [
+        "Write the markdown and python code structure for Midsem Part B Task 4.1 based on the provided AML_paper.pdf."
+    ]
+}
